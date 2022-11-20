@@ -16,6 +16,21 @@ defmodule ExampleAppWeb do
   below. Instead, define any helper function in modules
   and import those modules here.
   """
+  def params do
+    quote do
+      use Ecto.Schema
+      import Ecto.Changeset
+      import ExampleAppWeb.Gettext
+
+      @primary_key false
+
+      def fetch(term, key) do
+        term
+        |> Map.from_struct()
+        |> Map.fetch(String.to_existing_atom(key))
+      end
+    end
+  end
 
   def controller do
     quote do

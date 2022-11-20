@@ -21,9 +21,17 @@ defmodule ExampleAppWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", ExampleAppWeb do
-  #   pipe_through :api
-  # end
+  scope "/external", ExampleAppWeb.External do
+    pipe_through :api
+
+    resources "/payments", PaymentController
+  end
+
+  scope "/internal", ExampleAppWeb.Internal do
+    pipe_through :api
+
+    resources "/payments", PaymentController
+  end
 
   # Enables LiveDashboard only for development
   #
