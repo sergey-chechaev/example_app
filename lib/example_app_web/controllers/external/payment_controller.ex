@@ -5,6 +5,8 @@ defmodule ExampleAppWeb.External.PaymentController do
   alias ExampleApp.Payments.Payment
   alias Params.External.Payment, as: PaymentParams
 
+  action_fallback ExampleAppWeb.FallbackController
+
   def create(conn, payment_params) do
     with {:ok, prepared_params} <- PaymentParams.prepare(:create, payment_params),
          params <- Map.from_struct(prepared_params),

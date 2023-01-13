@@ -24,4 +24,21 @@ defmodule ExampleApp.PaymentsFixtures do
 
     payment
   end
+
+  @doc """
+  Generate a invoice.
+  """
+  def invoice_fixture(attrs \\ %{}) do
+    {:ok, invoice} =
+      attrs
+      |> Enum.into(%{
+        amount: "120.5",
+        bill_to: "some bill_to",
+        from: "some from",
+        tax: "120.5"
+      })
+      |> ExampleApp.Payments.create_invoice()
+
+    invoice
+  end
 end
